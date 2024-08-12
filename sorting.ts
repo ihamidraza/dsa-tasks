@@ -72,8 +72,56 @@ const insertionSort = (arr: number[]) => {
 	console.log('Sorted using Insertion Sort:', result);
 };
 
+const mergeSort = (arr: number[], start: number, end: number) => {
+	console.log(start, end);
+	if (start === end) return;
+
+	const mid = Math.floor((start + end) / 2);
+
+	const left = mergeSort(arr, start, mid);
+	const right = mergeSort(arr, mid + 1, end);
+
+	const merged = merge(arr, start, mid, end);
+
+	console.log('Array is sorted using merge sort', arr);
+
+	return arr;
+};
+
+const merge = (arr: number[], start: number, mid: number, end: number) => {
+	const temp: number[] = [];
+
+	let leftIndex = start;
+	let rightIndex = mid + 1;
+
+	while (leftIndex <= mid && rightIndex <= end) {
+		if (arr[leftIndex] < arr[rightIndex]) {
+			temp.push(arr[leftIndex]);
+			leftIndex++;
+		} else {
+			temp.push(arr[rightIndex]);
+			rightIndex++;
+		}
+	}
+
+	while (leftIndex <= mid) {
+		temp.push(arr[leftIndex]);
+		leftIndex++;
+	}
+	while (rightIndex <= end) {
+		temp.push(arr[rightIndex]);
+		rightIndex++;
+	}
+
+	for (let i = start; i <= end; i++) {
+		arr[i] = temp[i - start];
+	}
+
+	return;
+};
 const arr = [5, 4, 6, 8, 1, 0, -5, 9];
 
 // selectionSort(arr);
 // bubbleSort(arr);
-insertionSort(arr);
+// insertionSort(arr);
+mergeSort(arr, 0, arr.length - 1);
