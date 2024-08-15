@@ -119,9 +119,49 @@ const merge = (arr: number[], start: number, mid: number, end: number) => {
 
 	return;
 };
-const arr = [5, 4, 6, 8, 1, 0, -5, 9];
+
+const quickSort = (arr: number[], low: number, high: number) => {
+	if (low >= high) return;
+
+	const pIndex = partition(arr, low, high);
+
+	quickSort(arr, pIndex + 1, high);
+	quickSort(arr, low, pIndex - 1);
+	console.log('Quick sorted', arr);
+	return arr;
+};
+
+const partition = (arr: number[], low: number, high: number) => {
+	let pivot = arr[low];
+
+	let i = low;
+	let j = high;
+
+	while (i < j) {
+		while (arr[i] <= pivot && i < high) {
+			i++;
+		}
+
+		while (arr[j] > pivot && j > low) {
+			j--;
+		}
+
+		if (i < j) {
+			const temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+	}
+	const temp = arr[low];
+	arr[low] = arr[j];
+	arr[j] = temp;
+	return j;
+};
+
+const arr = [5, 4, 6, 8, 1, 0, -5, 9, 8, 1, -55, 600, 1545];
 
 // selectionSort(arr);
 // bubbleSort(arr);
 // insertionSort(arr);
-mergeSort(arr, 0, arr.length - 1);
+// mergeSort(arr, 0, arr.length - 1);
+quickSort(arr, 0, arr.length - 1);
