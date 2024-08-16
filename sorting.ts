@@ -125,8 +125,8 @@ const quickSort = (arr: number[], low: number, high: number) => {
 
 	const pIndex = partition(arr, low, high);
 
-	quickSort(arr, pIndex + 1, high);
 	quickSort(arr, low, pIndex - 1);
+	quickSort(arr, pIndex + 1, high);
 	console.log('Quick sorted', arr);
 	return arr;
 };
